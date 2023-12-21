@@ -21,7 +21,7 @@ export default function DataList({ data, heading, subheading }: DataList) {
                     {data.map((item) => (
                         <div key={item.key} className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">{item.key}</dt>
-                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-0 sm:col-span-2">{item.value}</dd>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-0 sm:col-span-2 break-all">{item.value}</dd>
                         </div>
                     ))}
                 </dl>
