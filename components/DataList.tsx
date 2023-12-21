@@ -1,3 +1,5 @@
+"use client";
+
 export type DataItem = {
     key: string,
     value: string | undefined
