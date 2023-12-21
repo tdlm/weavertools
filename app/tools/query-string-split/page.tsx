@@ -1,5 +1,7 @@
 "use client";
 
+import { useQueryState } from 'next-usequerystate'
+import { useSearchParams } from 'next/navigation'
 import DataList, { DataItem } from "@/components/DataList";
 import UrlInput from "@/components/UrlInput";
 import splitUrl from "@/lib/splitUrl";
@@ -8,12 +10,19 @@ import splitQueryString from "@/lib/splitQueryString";
 import { useEffect, useState } from "react";
 
 const QueryStringSplitPage = () => {
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useQueryState('url');
     const [urlParts, setUrlParts] = useState<DataItem[]>([]);
     const [queryParts, setQueryParts] = useState<DataItem[]>([]);
+    const searchParams = useSearchParams();
 
     useEffect(() => {
-        if (url.length > 0 && isValidUrl(url)) {
+        if (searchParams.get('url')) {
+            setUrl(searchParams.get('url') as string);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!!url && url.length > 0 && isValidUrl(url)) {
             const data = splitUrl(url);
 
             let tempUrlParts = [];
@@ -43,12 +52,13 @@ const QueryStringSplitPage = () => {
         <div>
             <UrlInput
                 className={{
-                    "border border-red-500": url.length > 0 && !isValidUrl(url)
+                    "border border-red-500": !!url && url.length > 0 && !isValidUrl(url)
                 }}
                 label="URL"
                 name="url"
                 placeholder="Copy-paste your URL here"
                 onChange={(e) => { setUrl(e.target.value) }}
+                value={url || ""}
             />
             {0 < urlParts.length && <section className="mt-6">
                 <DataList
