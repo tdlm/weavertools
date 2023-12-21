@@ -2,7 +2,7 @@
 
 import DataList, { DataItem } from "@/components/DataList";
 import UrlInput from "@/components/UrlInput";
-import splitUrl from "@/lib/SplitUrl";
+import splitUrl from "@/lib/splitUrl";
 import isValidUrl from "@/lib/isValidUrl";
 import splitQueryString from "@/lib/splitQueryString";
 import { useEffect, useState } from "react";

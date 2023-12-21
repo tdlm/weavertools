@@ -1,5 +1,3 @@
-import { PaperClipIcon } from '@heroicons/react/20/solid'
-
 export type DataItem = {
     key: string,
     value: string | undefined
