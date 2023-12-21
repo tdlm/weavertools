@@ -1,18 +1,12 @@
 "use client";
 
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import {
-    Bars3Icon,
-    CalendarIcon,
-    ChartPieIcon,
-    DocumentDuplicateIcon,
-    FolderIcon,
-    LinkIcon,
-    HomeIcon,
-    UsersIcon,
-    XMarkIcon,
-} from '@heroicons/react/24/outline'
+    Bars3Icon, LinkIcon, XMarkIcon
+} from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const navigation = [
     { name: 'Query String Split', href: '/tools/query-string-split', icon: LinkIcon, current: true },
@@ -69,14 +63,10 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
                                             </button>
                                         </div>
                                     </Transition.Child>
-                                    {/* Sidebar component, swap this element with another sidebar if you like */}
+
                                     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
                                         <div className="flex h-16 shrink-0 items-center">
-                                            <img
-                                                className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                                alt="Your Company"
-                                            />
+                                            <Link href="/"><Image src="/tdlm.svg" alt="Weaver Tools" width={32} height={32} /></Link>
                                         </div>
                                         <nav className="flex flex-1 flex-col">
                                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -115,11 +105,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
                     {/* Sidebar component, swap this element with another sidebar if you like */}
                     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
                         <div className="flex h-16 shrink-0 items-center">
-                            <img
-                                className="h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                alt="Your Company"
-                            />
+                            <Link href="/"><Image src="/tdlm.svg" alt="Weaver Tools" width={32} height={32} /></Link>
                         </div>
                         <nav className="flex flex-1 flex-col">
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -153,7 +139,9 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
                         <span className="sr-only">Open sidebar</span>
                         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
-                    <div className="flex-1 text-sm font-semibold leading-6 text-white">Weaver Tools</div>
+                    <div className="flex-1 text-sm font-semibold leading-6 text-white">
+                        <Link href="/">Weaver Tools</Link>
+                    </div>
                 </div>
 
                 <main className="py-10 lg:pl-72">

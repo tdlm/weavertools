@@ -6,6 +6,13 @@ import BaseLayout from '@/components/BaseLayout'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  icons: {
+    icon: {
+      url: "/favicon.png",
+      type: "image/png",
+    },
+    shortcut: { url: "/favicon.png", type: "image/png" },
+  },
   title: 'Weaver Tools',
   description: 'Dev/QA tools',
 }
