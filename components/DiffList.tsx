@@ -24,6 +24,14 @@ type DiffListProps = {
 export default function DiffList({ className = "", diffs, heading, subheading }: DiffListProps) {
     const { commonDiff, exclusiveToFirst, exclusiveToSecond } = diffs;
 
+    if (!commonDiff.length && !exclusiveToFirst.length && !exclusiveToSecond.length) {
+        return (
+            <div className="mt-6 text-sm font-medium text-gray-500">
+                There are currently no differences.
+            </div>
+        );
+    }
+
     return (
         <div className={cn(className)}>
             <div className="px-4 sm:px-0">

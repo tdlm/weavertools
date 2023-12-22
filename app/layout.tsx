@@ -21,7 +21,10 @@ export const metadata: Metadata = {
     ],
     shortcut: { url: "/tdlm.svg", type: "image/png" },
   },
-  title: 'Weaver Tools',
+  title: {
+    template: '%s | Weaver Tools',
+    default: 'Weaver Tools',
+  },
   description: 'Dev/QA tools',
 }
 
