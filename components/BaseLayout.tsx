@@ -113,7 +113,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
                     {/* Sidebar component, swap this element with another sidebar if you like */}
                     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
                         <div className="flex h-16 shrink-0 items-center">
-                            <Link href="/"><Image src="/tdlm.svg" alt="Weaver Tools" width={32} height={32} /></Link>
+                            <Link href="/"><Image src="/tdlm-white.svg" alt="Weaver Tools" width={32} height={32} /></Link>
                         </div>
                         <nav className="flex flex-1 flex-col">
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
