@@ -7,11 +7,19 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   icons: {
-    icon: {
-      url: "/favicon.png",
-      type: "image/png",
-    },
-    shortcut: { url: "/favicon.png", type: "image/png" },
+    icon: [
+      {
+        media: '(prefers-color-scheme: light)',
+        url: '/tdlm.svg',
+        href: '/tdlm.svg',
+      },
+      {
+        media: '(prefers-color-scheme: dark)',
+        url: '/tdlm-white.svg',
+        href: '/tdlm-white.svg',
+      },
+    ],
+    shortcut: { url: "/tdlm.svg", type: "image/png" },
   },
   title: 'Weaver Tools',
   description: 'Dev/QA tools',

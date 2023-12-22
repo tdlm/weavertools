@@ -3,14 +3,16 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import {
-    Bars3Icon, LinkIcon, XMarkIcon
+    Bars3Icon, DocumentDuplicateIcon, LinkIcon, XMarkIcon
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'
 
 const navigation = [
     { name: 'Query String Split', href: '/tools/query-string-split', icon: LinkIcon, current: true },
-]
+    { name: 'Query String Diff', href: '/tools/query-string-diff', icon: DocumentDuplicateIcon, current: false },
+];
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -18,6 +20,12 @@ function classNames(...classes: any[]) {
 
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const pathname = usePathname()
+
+    const liveNavigation = navigation.map(item => ({
+        ...item,
+        current: pathname === item.href,
+    }));
 
     return (
         <>
@@ -72,7 +80,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
                                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                                 <li>
                                                     <ul role="list" className="-mx-2 space-y-1">
-                                                        {navigation.map((item) => (
+                                                        {liveNavigation.map((item) => (
                                                             <li key={item.name}>
                                                                 <a
                                                                     href={item.href}
@@ -111,7 +119,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                 <li>
                                     <ul role="list" className="-mx-2 space-y-1">
-                                        {navigation.map((item) => (
+                                        {liveNavigation.map((item) => (
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}

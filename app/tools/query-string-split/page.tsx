@@ -1,7 +1,6 @@
 "use client";
 
 import { useQueryState } from 'next-usequerystate'
-import { useSearchParams } from 'next/navigation'
 import DataList, { DataItem } from "@/components/DataList";
 import UrlInput from "@/components/UrlInput";
 import splitUrl from "@/lib/splitUrl";
@@ -13,13 +12,6 @@ const QueryStringSplitPage = () => {
     const [url, setUrl] = useQueryState('url');
     const [urlParts, setUrlParts] = useState<DataItem[]>([]);
     const [queryParts, setQueryParts] = useState<DataItem[]>([]);
-    const searchParams = useSearchParams();
-
-    useEffect(() => {
-        if (searchParams.get('url')) {
-            setUrl(searchParams.get('url') as string);
-        }
-    }, []);
 
     useEffect(() => {
         if (!!url && url.length > 0 && isValidUrl(url)) {
@@ -60,6 +52,7 @@ const QueryStringSplitPage = () => {
                 onChange={(e) => { setUrl(e.target.value) }}
                 value={url || ""}
             />
+
             {0 < urlParts.length && <section className="mt-6">
                 <DataList
                     heading="URL Parts"
