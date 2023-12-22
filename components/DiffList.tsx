@@ -3,6 +3,7 @@
 import { DataDiffItem } from "@/lib/createDiffMap";
 import { cn } from "@/lib/utils";
 import { DataItem } from "./DataList";
+import NoticeEmptyStateDashed from "./NoticeEmptyStateDashed";
 
 export type DiffItem = {
     key: string,
@@ -26,9 +27,9 @@ export default function DiffList({ className = "", diffs, heading, subheading }:
 
     if (!commonDiff.length && !exclusiveToFirst.length && !exclusiveToSecond.length) {
         return (
-            <div className="mt-6 text-sm font-medium text-gray-500">
-                There are currently no differences.
-            </div>
+            <NoticeEmptyStateDashed className="mt-6 text-sm font-medium text-gray-500">
+                There are currently no URL differences.
+            </NoticeEmptyStateDashed>
         );
     }
 
