@@ -9,7 +9,10 @@ import splitQueryString from "@/lib/splitQueryString";
 import { useEffect, useState } from "react";
 
 const QueryStringSplitPage = () => {
-    const [url, setUrl] = useQueryState('url');
+    const [url, setUrl] = useQueryState('url', {
+        parse: (value) => atob(decodeURIComponent(value)),
+        serialize: (value) => encodeURIComponent(btoa(value))
+    });
     const [urlParts, setUrlParts] = useState<DataItem[]>([]);
     const [queryParts, setQueryParts] = useState<DataItem[]>([]);
 

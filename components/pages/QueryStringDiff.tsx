@@ -8,30 +8,23 @@ import UrlInput from "@/components/UrlInput";
 import createDiffMap from '@/lib/createDiffMap';
 import isValidUrl from "@/lib/isValidUrl";
 import splitQueryString from "@/lib/splitQueryString";
-import splitUrl from "@/lib/splitUrl";
 
 const QueryStringDiffPage = () => {
-    const [url, setUrl] = useQueryState('url');
-    const [compareUrl, setCompareUrl] = useQueryState('compare-url');
+    const [url, setUrl] = useQueryState('url', {
+        parse: (value) => atob(decodeURIComponent(value)),
+        serialize: (value) => encodeURIComponent(btoa(value))
+    });
 
-    const [urlParts, setUrlParts] = useState<DataItem[]>([]);
+    const [compareUrl, setCompareUrl] = useQueryState('compare-url', {
+        parse: (value) => atob(decodeURIComponent(value)),
+        serialize: (value) => encodeURIComponent(btoa(value))
+    });
+
     const [queryParts, setQueryParts] = useState<DataItem[]>([]);
-
-    const [compareUrlParts, setCompareUrlParts] = useState<DataItem[]>([]);
     const [compareQueryParts, setCompareQueryParts] = useState<DataItem[]>([]);
 
     useEffect(() => {
         if (!!url && url.length > 0 && isValidUrl(url)) {
-            const data = splitUrl(url);
-
-            let tempUrlParts = [];
-
-            for (const item in data) {
-                tempUrlParts.push({ key: item, value: data[item as keyof typeof data] });
-            }
-
-            setUrlParts(tempUrlParts);
-
             const queryData = splitQueryString(url);
 
             let tempQueryParts = [];
@@ -42,21 +35,10 @@ const QueryStringDiffPage = () => {
 
             setQueryParts(tempQueryParts);
         } else {
-            setUrlParts([]);
             setQueryParts([]);
         }
 
         if (!!compareUrl && compareUrl.length > 0 && isValidUrl(compareUrl)) {
-            const data = splitUrl(compareUrl);
-
-            let tempUrlParts = [];
-
-            for (const item in data) {
-                tempUrlParts.push({ key: item, value: data[item as keyof typeof data] });
-            }
-
-            setCompareUrlParts(tempUrlParts);
-
             const queryData = splitQueryString(compareUrl);
 
             let tempQueryParts = [];
@@ -67,7 +49,6 @@ const QueryStringDiffPage = () => {
 
             setCompareQueryParts(tempQueryParts);
         } else {
-            setCompareUrlParts([]);
             setCompareQueryParts([]);
         }
     }, [compareUrl, url]);
