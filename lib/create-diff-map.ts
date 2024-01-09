@@ -1,4 +1,4 @@
-import { DataItem } from "@/components/DataList";
+import { DataItem } from "@/components/data-list";
 
 export type DataDiffItem = {
   key: string;
