@@ -45,17 +45,19 @@ const QueryStringSplitPage = () => {
 
     return (
         <section className="flex flex-col gap-2 w-full">
-            <UrlInput
-                className={{
-                    "border border-red-500": !!url && url.length > 0 && !isValidUrl(url),
-                    "mb-4": true
-                }}
-                label="URL"
-                name="url"
-                placeholder="Copy-paste your URL here"
-                onChange={(e) => { setUrl(e.target.value) }}
-                value={url || ""}
-            />
+            <div className="sticky top-0">
+                <UrlInput
+                    className={{
+                        "border border-red-500": !!url && url.length > 0 && !isValidUrl(url),
+                        "bg-white mb-4": true
+                    }}
+                    label="URL"
+                    name="url"
+                    placeholder="Copy-paste your URL here"
+                    onChange={(e) => { setUrl(e.target.value) }}
+                    value={url || ""}
+                />
+            </div>
 
             {0 < urlParts.length &&
                 <DataList

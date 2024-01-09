@@ -55,27 +55,31 @@ const QueryStringDiffPage = () => {
 
     return (
         <section className="flex flex-col gap-2 w-full">
-            <UrlInput
-                className={{
-                    "border border-red-500": !!url && url.length > 0 && !isValidUrl(url)
-                }}
-                label="URL"
-                name="url"
-                placeholder="Copy-paste your URL here"
-                onChange={(e) => { setUrl(e.target.value) }}
-                value={url || ""}
-            />
+            <div className="sticky top-0 bg-white">
+                <UrlInput
+                    className={{
+                        "border border-red-500": !!url && url.length > 0 && !isValidUrl(url),
+                        "mb-4": true
+                    }}
+                    label="URL"
+                    name="url"
+                    placeholder="Copy-paste your URL here"
+                    onChange={(e) => { setUrl(e.target.value) }}
+                    value={url || ""}
+                />
 
-            <UrlInput
-                className={{
-                    "border border-red-500": !!compareUrl && compareUrl.length > 0 && !isValidUrl(compareUrl)
-                }}
-                label="Compare URL"
-                name="compare-url"
-                placeholder="Copy-paste your other URL here"
-                onChange={(e) => { setCompareUrl(e.target.value) }}
-                value={compareUrl || ""}
-            />
+                <UrlInput
+                    className={{
+                        "border border-red-500": !!compareUrl && compareUrl.length > 0 && !isValidUrl(compareUrl),
+                        "mb-4": true
+                    }}
+                    label="Compare URL"
+                    name="compare-url"
+                    placeholder="Copy-paste your other URL here"
+                    onChange={(e) => { setCompareUrl(e.target.value) }}
+                    value={compareUrl || ""}
+                />
+            </div>
 
             <DiffList
                 className="mt-6"
