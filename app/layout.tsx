@@ -1,45 +1,39 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import BaseLayout from '@/components/BaseLayout'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import BaseLayout from "@/components/base-layout";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        media: '(prefers-color-scheme: light)',
-        url: '/tdlm.svg',
-        href: '/tdlm.svg',
+        media: "(prefers-color-scheme: light)",
+        url: "/tdlm.svg",
+        href: "/tdlm.svg",
       },
       {
-        media: '(prefers-color-scheme: dark)',
-        url: '/tdlm-white.svg',
-        href: '/tdlm-white.svg',
+        media: "(prefers-color-scheme: dark)",
+        url: "/tdlm-white.svg",
+        href: "/tdlm-white.svg",
       },
     ],
     shortcut: { url: "/tdlm.svg", type: "image/png" },
   },
   title: {
-    template: '%s | Weaver Tools',
-    default: 'Weaver Tools',
+    template: "%s | Weaver Tools",
+    default: "Weaver Tools",
   },
-  description: 'Dev/QA tools',
-}
+  description: "Dev/QA tools",
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <BaseLayout>
-          {children}
-        </BaseLayout>
+        <BaseLayout>{children}</BaseLayout>
       </body>
     </html>
-  )
+  );
 }
