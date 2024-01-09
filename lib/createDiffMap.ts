@@ -11,6 +11,10 @@ export default function createDiffMap(array1: DataItem[], array2: DataItem[]) {
   let exclusiveToFirst: DataItem[] = [];
   let exclusiveToSecond: DataItem[] = [];
 
+  if (array1.length === 0 || array2.length === 0) {
+    return { commonDiff, exclusiveToFirst, exclusiveToSecond };
+  }
+
   const array2Map = new Map(array2.map((item) => [item.key, item.value]));
 
   // Find differences and items exclusive to the first array
