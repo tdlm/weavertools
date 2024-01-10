@@ -8,7 +8,8 @@ import splitQueryString from "@/lib/split-query-string";
 import splitUrl from "@/lib/split-url";
 import UrlInput from "@/components/url-input";
 import TitleHeader from "../title-header";
-import { LinkIcon } from "@heroicons/react/24/outline";
+import { HiOutlineLink as LinkIcon } from "react-icons/hi2";
+
 import NoticeEmptyStateDashedWithIcon from "@/components/notice-empty-state-dashed-with-icon";
 
 const QueryStringSplitPage = () => {

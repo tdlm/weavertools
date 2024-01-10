@@ -1,3 +1,84 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Layout */
+.json-container {
+  @apply not-italic font-[bold] leading-[1.4em] text-[0.9rem] transition-[background-color] duration-500 bg-[white] dark:bg-[black];
+  font-family: menlo, consolas, monospace;
+}
+a.json-link {
+  @apply no-underline border-b border-solid hover:bg-transparent text-[purple] visited:text-[slategray] hover:text-[blueviolet] active:text-[slategray] dark:text-[mediumorchid] dark:visited:text-[slategray] dark:hover:text-[violet] dark:active:text-[slategray];
+  outline: none;
+}
+a.json-link:hover {
+  outline: none;
+}
+ol.json-lines {
+  @apply whitespace-normal m-0;
+  padding-inline-start: 3em;
+}
+ol.json-lines > li {
+  @apply whitespace-pre indent-[0.7em] leading-[1.5em] p-0;
+}
+ol.json-lines > li::marker {
+  font-family: system-ui, sans-serif;
+}
+.json-key,
+.json-string,
+.json-number,
+.json-boolean,
+.json-null,
+.json-mark,
+a.json-link,
+ol.json-lines > li {
+  @apply transition-all duration-500;
+}
+
+/* Colors */
+.json-key {
+  @apply text-[brown] dark:text-[indianred];
+}
+.json-string {
+  @apply text-[olive] dark:text-[khaki];
+}
+.json-number {
+  @apply text-[navy] dark:text-[deepskyblue];
+}
+.json-boolean {
+  @apply text-[teal] dark:text-[mediumseagreen];
+}
+.json-null {
+  @apply text-[dimgray] dark:text-[darkorange];
+}
+.json-mark {
+  @apply text-[black] dark:text-[silver];
+}
+ol.json-lines > li::marker {
+  @apply text-[dimgray];
+}
+ol.json-lines > li:nth-child(odd) {
+  @apply bg-[gainsboro];
+}
+ol.json-lines > li:nth-child(even) {
+  @apply bg-[whitesmoke];
+}
+ol.json-lines > li:hover {
+  @apply bg-[lemonchiffon];
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  ol.json-lines > li::marker {
+    @apply text-[silver];
+  }
+  ol.json-lines > li:nth-child(odd) {
+    @apply bg-[#222222];
+  }
+  ol.json-lines > li:nth-child(even) {
+    @apply bg-[#161616];
+  }
+  ol.json-lines > li:hover {
+    @apply bg-[dimgray];
+  }
+}
