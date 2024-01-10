@@ -12,7 +12,6 @@ type DataList = {
 };
 
 export default function DataList({ data, heading, subheading }: DataList) {
-  console.log(data);
   return (
     <div>
       <div className="px-4 sm:px-0">

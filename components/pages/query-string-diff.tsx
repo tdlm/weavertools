@@ -3,13 +3,12 @@
 import { useEffect, useState } from "react";
 import { useQueryState } from "next-usequerystate";
 import { DataItem } from "@/components/data-list";
-import DiffList from "@/components/diff-list";
-import UrlInput from "@/components/url-input";
 import createDiffMap from "@/lib/create-diff-map";
+import DiffList from "@/components/diff-list";
 import isValidUrl from "@/lib/is-valid-url";
 import splitQueryString from "@/lib/split-query-string";
-import CopyButton from "@/components/copy-button";
-import TitleHeader from "../title-header";
+import TitleHeader from "@/components/title-header";
+import UrlInput from "@/components/url-input";
 
 const QueryStringDiffPage = () => {
   const fullURL = typeof window !== "undefined" ? window.location.href : "";

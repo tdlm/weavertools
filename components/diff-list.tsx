@@ -3,8 +3,8 @@
 import { DataDiffItem } from "@/lib/create-diff-map";
 import { cn } from "@/lib/utils";
 import { DataItem } from "./data-list";
-import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import NoticeEmptyStateDashedWithIcon from "./notice-empty-state-dashed-with-icon";
+import { HiOutlineDocumentDuplicate as DocumentDuplicateIcon } from "react-icons/hi2";
 
 export type DiffItem = {
   key: string;
