@@ -1,37 +1,49 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import { prettyPrintJson } from "pretty-print-json";
 import { parse } from "comment-json";
 
-import { HiOutlineUserCircle as AlertCircle } from "react-icons/hi2";
-
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { cn } from "@/lib/utils";
+import { HiOutlineUserCircle as AlertCircle } from "react-icons/hi2";
+import { Textarea } from "@/components/ui/textarea";
 
 type Args = {
   className?: string | Object;
+  initialValue?: string;
+  onFormatSuccess?: (json: string) => void;
   placeholder?: string;
 };
 
-export default function CodeText({ className = "", placeholder = "" }: Args) {
+export default function CodeText({
+  className = "",
+  initialValue = "",
+  onFormatSuccess,
+  placeholder = "",
+}: Args) {
   const [error, setError] = useState<string>("");
   const [input, setInput] = useState<string>("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const outputRef = useRef<HTMLOutputElement>(null);
 
   useEffect(() => {
+    console.log("initialValue", initialValue);
+  }, [initialValue]);
+
+  useEffect(() => {
     if (outputRef.current && inputRef.current) {
       try {
-        let text = inputRef.current.value.length > 0 ? inputRef.current.value : "{}";
+        let text = inputRef.current.value.length > 0 ? inputRef.current.value : "";
         text = text.replace(/(\r\n|\n|\r)/gm, " ");
         text = text.replace(/\s+/g, " ");
-        const json = parse(text);
 
-        let encodedJson = encodeURIComponent(btoa(text)),
-          decodedJson = atob(decodeURIComponent(encodedJson));
-        console.log({ encodedJson, decodedJson });
+        if (text.length === 0) {
+          outputRef.current.innerHTML = "";
+          onFormatSuccess && onFormatSuccess("");
+        }
+
+        const json = parse(text);
 
         const prettyJson = prettyPrintJson.toHtml(json, {
           quoteKeys: true,
@@ -39,7 +51,11 @@ export default function CodeText({ className = "", placeholder = "" }: Args) {
           trailingCommas: true,
         });
 
+        // Send the formatted JSON to the output.
         outputRef.current.innerHTML = prettyJson;
+
+        // Send the raw JSON to the callback.
+        onFormatSuccess && onFormatSuccess(JSON.stringify(json));
       } catch (err) {
         // Show an error message about invalid JSON.
         if (err instanceof Error) {
@@ -63,6 +79,7 @@ export default function CodeText({ className = "", placeholder = "" }: Args) {
     >
       <Textarea
         className="break-words h-[200px] w-full"
+        defaultValue={initialValue}
         onChange={handleInputChange}
         placeholder={placeholder}
         ref={inputRef}
