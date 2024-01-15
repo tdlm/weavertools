@@ -19,6 +19,7 @@ const QueryStringSplitPage = () => {
     parse: (value) => atob(decodeURIComponent(value)),
     serialize: (value) => encodeURIComponent(btoa(value)),
   });
+
   const [urlParts, setUrlParts] = useState<DataItem[]>([]);
   const [queryParts, setQueryParts] = useState<DataItem[]>([]);
 
