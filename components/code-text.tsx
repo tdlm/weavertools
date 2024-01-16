@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { prettyPrintJson } from "pretty-print-json";
 import { parse } from "comment-json";
 
@@ -11,63 +11,60 @@ import { Textarea } from "@/components/ui/textarea";
 
 type Args = {
   className?: string | Object;
-  initialValue?: string;
+  initialValue?: any;
   onFormatSuccess?: (json: string) => void;
   placeholder?: string;
 };
 
 export default function CodeText({
   className = "",
-  initialValue = "",
+  initialValue = null,
   onFormatSuccess,
   placeholder = "",
 }: Args) {
   const [error, setError] = useState<string>("");
-  const [input, setInput] = useState<string>("");
-  const inputRef = useRef<HTMLTextAreaElement>(null);
-  const outputRef = useRef<HTMLOutputElement>(null);
+  const [input, setInput] = useState<string>(initialValue);
+  const [output, setOutput] = useState<string>("");
 
   useEffect(() => {
-    console.log("initialValue", initialValue);
-  }, [initialValue]);
+    try {
+      let text = input;
+      debugger;
 
-  useEffect(() => {
-    if (outputRef.current && inputRef.current) {
-      try {
-        let text = inputRef.current.value.length > 0 ? inputRef.current.value : "";
+      if (input.length > 0 && "null" !== input) {
         text = text.replace(/(\r\n|\n|\r)/gm, " ");
         text = text.replace(/\s+/g, " ");
+      } else {
+        setInput("");
+        setOutput("");
+        onFormatSuccess && onFormatSuccess("");
+        return;
+      }
 
-        if (text.length === 0) {
-          outputRef.current.innerHTML = "";
-          onFormatSuccess && onFormatSuccess("");
-        }
+      const json = parse(text);
 
-        const json = parse(text);
+      const prettyJson = prettyPrintJson.toHtml(json, {
+        quoteKeys: true,
+        lineNumbers: false,
+        trailingCommas: true,
+      });
 
-        const prettyJson = prettyPrintJson.toHtml(json, {
-          quoteKeys: true,
-          lineNumbers: false,
-          trailingCommas: true,
-        });
+      // Send the formatted JSON to the output.
+      setOutput(prettyJson);
 
-        // Send the formatted JSON to the output.
-        outputRef.current.innerHTML = prettyJson;
-
-        // Send the raw JSON to the callback.
-        onFormatSuccess && onFormatSuccess(JSON.stringify(json));
-      } catch (err) {
-        // Show an error message about invalid JSON.
-        if (err instanceof Error) {
-          setError(err?.message);
-        }
+      // Send the raw JSON to the callback.
+      onFormatSuccess && onFormatSuccess(json as string);
+    } catch (err) {
+      // Show an error message about invalid JSON.
+      if (err instanceof Error) {
+        setError(err?.message);
       }
     }
-  }, [input]);
+  }, [input, onFormatSuccess]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setError("");
-    setInput(event.target.value.trim() as string);
+    setInput(event.target.value.trim());
   };
 
   return (
@@ -79,10 +76,9 @@ export default function CodeText({
     >
       <Textarea
         className="break-words h-[200px] w-full"
-        defaultValue={initialValue}
+        defaultValue={input}
         onChange={handleInputChange}
         placeholder={placeholder}
-        ref={inputRef}
       />
 
       {error.length > 0 ? (
@@ -96,7 +92,7 @@ export default function CodeText({
           <pre className="min-h[350px] bg-white">
             <output
               className="block json-container whitespace-pre m-0 p-2 bg-white overflow-x-auto"
-              ref={outputRef}
+              dangerouslySetInnerHTML={{ __html: output }}
             />
           </pre>
         </div>

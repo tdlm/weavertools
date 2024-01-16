@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useQueryState } from "next-usequerystate";
-import DataList, { DataItem } from "@/components/data-list";
-import isValidUrl from "@/lib/is-valid-url";
-import splitQueryString from "@/lib/split-query-string";
-import splitUrl from "@/lib/split-url";
-import UrlInput from "@/components/url-input";
-import TitleHeader from "../title-header";
+import { useQueryState } from "nuqs";
 import { HiOutlineLink as LinkIcon } from "react-icons/hi2";
 
+import DataList, { DataItem } from "@/components/data-list";
+import isValidUrl from "@/lib/is-valid-url";
 import NoticeEmptyStateDashedWithIcon from "@/components/notice-empty-state-dashed-with-icon";
+import splitQueryString from "@/lib/split-query-string";
+import splitUrl from "@/lib/split-url";
+import TitleHeader from "@/components/title-header";
+import UrlInput from "@/components/url-input";
 
 const QueryStringSplitPage = () => {
   const fullURL = typeof window !== "undefined" ? window.location.href : "";

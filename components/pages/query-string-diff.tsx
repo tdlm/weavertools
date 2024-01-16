@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useQueryState } from "next-usequerystate";
+import { useQueryState } from "nuqs";
+
 import { DataItem } from "@/components/data-list";
 import createDiffMap from "@/lib/create-diff-map";
 import DiffList from "@/components/diff-list";
