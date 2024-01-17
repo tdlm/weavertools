@@ -27,7 +27,7 @@ export default function CodeText({
   const [error, setError] = useState<string>("");
   const [input, setInput] = useState<string>(initialValue);
   const [output, setOutput] = useState<string>("");
-  const [yoink, setYoink] = useState<string>("");
+  const [rawOutput, setRawOutput] = useState<string>("");
   const ref = useRef<HTMLOutputElement | null>(null);
 
   useEffect(() => {
@@ -63,11 +63,12 @@ export default function CodeText({
         setError(err?.message);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
 
   useLayoutEffect(() => {
     if (output.length > 0 && ref.current) {
-      setYoink(ref.current.innerText);
+      setRawOutput(ref.current.innerText);
     }
   }, [output]);
 
@@ -103,7 +104,7 @@ export default function CodeText({
               <CopyButton
                 className="self-end absolute top-4 right-4"
                 text="Copy JSON"
-                copy={yoink}
+                copy={rawOutput}
                 onCopiedText="Copied JSON"
               />
               <div className="border p-2 rounded-md" data-component="pretty-print">
