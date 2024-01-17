@@ -13,6 +13,7 @@ import NoticeEmptyStateDashedWithIcon from "./notice-empty-state-dashed-with-ico
 
 type Args = {
   className?: string | Object;
+  externalError?: string;
   initialValue?: any;
   onFormatSuccess?: (json: string) => void;
   placeholder?: string;
@@ -20,6 +21,7 @@ type Args = {
 
 export default function CodeText({
   className = "",
+  externalError = "",
   initialValue = null,
   onFormatSuccess,
   placeholder = "",
@@ -76,6 +78,14 @@ export default function CodeText({
     setError("");
     setInput(event.target.value.trim());
   };
+
+  useEffect(() => {
+    setInput(initialValue);
+  }, [initialValue]);
+
+  useEffect(() => {
+    setError(externalError);
+  }, [externalError]);
 
   return (
     <div
