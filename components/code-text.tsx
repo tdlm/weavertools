@@ -59,7 +59,7 @@ export default function CodeText({
         setError(err?.message);
       }
     }
-  }, [input, onFormatSuccess]);
+  }, [input]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setError("");
