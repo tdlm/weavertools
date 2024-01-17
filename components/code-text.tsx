@@ -6,7 +6,7 @@ import { parse } from "comment-json";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
-import { HiOutlineUserCircle as AlertCircle } from "react-icons/hi2";
+import { CircleUserRound as CircleUserRoundIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 
 type Args = {
@@ -29,7 +29,6 @@ export default function CodeText({
   useEffect(() => {
     try {
       let text = input;
-      debugger;
 
       if (input.length > 0 && "null" !== input) {
         text = text.replace(/(\r\n|\n|\r)/gm, " ");
@@ -83,7 +82,7 @@ export default function CodeText({
 
       {error.length > 0 ? (
         <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
+          <CircleUserRoundIcon size={20} />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>

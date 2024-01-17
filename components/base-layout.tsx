@@ -1,27 +1,33 @@
 "use client";
 
 import { Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import {
-  HiOutlineBars3 as Bars3Icon,
-  HiOutlineDocumentDuplicate as DocumentDuplicateIcon,
-  HiOutlineLink as LinkIcon,
-  HiOutlineXMark as XMarkIcon,
-} from "react-icons/hi2";
-import { TbBraces } from "react-icons/tb";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  Braces as BracesIcon,
+  Diff as DiffIcon,
+  Menu as MenuIcon,
+  Unlink as UnlinkIcon,
+  X as XIcon,
+} from "lucide-react";
+
+import { Dialog, Transition } from "@headlessui/react";
 
 const navigation = [
-  { name: "JSON Formatter", href: "/tools/json-formatter", icon: TbBraces, current: true },
+  { name: "JSON Formatter", href: "/tools/json-formatter", icon: BracesIcon, current: true },
   {
     name: "Query String Diff",
     href: "/tools/query-string-diff",
-    icon: DocumentDuplicateIcon,
+    icon: DiffIcon,
     current: false,
   },
-  { name: "Query String Split", href: "/tools/query-string-split", icon: LinkIcon, current: true },
+  {
+    name: "Query String Split",
+    href: "/tools/query-string-split",
+    icon: UnlinkIcon,
+    current: true,
+  },
 ];
 
 function classNames(...classes: any[]) {
@@ -81,7 +87,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
                         onClick={() => setSidebarOpen(false)}
                       >
                         <span className="sr-only">Close sidebar</span>
-                        <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                        <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
                       </button>
                     </div>
                   </Transition.Child>
@@ -166,7 +172,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <MenuIcon className="h-6 w-6" aria-hidden="true" />
           </button>
           <div className="flex-1 text-sm font-semibold leading-6 text-white">
             <Link href="/">Weaver Tools</Link>

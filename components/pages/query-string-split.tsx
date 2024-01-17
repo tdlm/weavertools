@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryState } from "nuqs";
-import { HiOutlineLink as LinkIcon } from "react-icons/hi2";
+import { Unlink } from "lucide-react";
 
 import DataList, { DataItem } from "@/components/data-list";
 import isValidUrl from "@/lib/is-valid-url";
@@ -72,7 +72,7 @@ const QueryStringSplitPage = () => {
       {0 === urlParts.length && 0 === queryParts.length && (
         <NoticeEmptyStateDashedWithIcon
           className="mt-6 text-sm font-medium text-gray-500"
-          icon={<LinkIcon className="mx-auto h-12 w-12 text-gray-400" height={48} width={48} />}
+          icon={<Unlink className="mx-auto h-12 w-12 text-gray-400" height={48} width={48} />}
         >
           Please enter a valid URL.
         </NoticeEmptyStateDashedWithIcon>

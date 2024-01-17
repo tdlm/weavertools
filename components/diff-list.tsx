@@ -4,7 +4,7 @@ import { DataDiffItem } from "@/lib/create-diff-map";
 import { cn } from "@/lib/utils";
 import { DataItem } from "./data-list";
 import NoticeEmptyStateDashedWithIcon from "./notice-empty-state-dashed-with-icon";
-import { HiOutlineDocumentDuplicate as DocumentDuplicateIcon } from "react-icons/hi2";
+import { Diff as DiffIcon } from "lucide-react";
 
 export type DiffItem = {
   key: string;
@@ -30,13 +30,7 @@ export default function DiffList({ className = "", diffs, heading, subheading }:
     return (
       <NoticeEmptyStateDashedWithIcon
         className="mt-6 text-sm font-medium text-gray-500"
-        icon={
-          <DocumentDuplicateIcon
-            className="mx-auto h-12 w-12 text-gray-400"
-            height={48}
-            width={48}
-          />
-        }
+        icon={<DiffIcon className="mx-auto h-12 w-12 text-gray-400" size={48} />}
       >
         There are currently no URL differences.
       </NoticeEmptyStateDashedWithIcon>
