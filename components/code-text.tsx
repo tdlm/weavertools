@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { prettyPrintJson } from "pretty-print-json";
 import { parse } from "comment-json";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
-import { CircleUserRound as CircleUserRoundIcon } from "lucide-react";
+import { Braces as BracesIcon, CircleUserRound as CircleUserRoundIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import CopyButton from "./copy-button";
+import NoticeEmptyStateDashedWithIcon from "./notice-empty-state-dashed-with-icon";
 
 type Args = {
   className?: string | Object;
@@ -25,6 +27,8 @@ export default function CodeText({
   const [error, setError] = useState<string>("");
   const [input, setInput] = useState<string>(initialValue);
   const [output, setOutput] = useState<string>("");
+  const [rawOutput, setRawOutput] = useState<string>("");
+  const ref = useRef<HTMLOutputElement | null>(null);
 
   useEffect(() => {
     try {
@@ -59,7 +63,14 @@ export default function CodeText({
         setError(err?.message);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
+
+  useLayoutEffect(() => {
+    if (output.length > 0 && ref.current) {
+      setRawOutput(ref.current.innerText);
+    }
+  }, [output]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setError("");
@@ -87,13 +98,36 @@ export default function CodeText({
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       ) : (
-        <div className="border p-2 rounded-md" data-component="pretty-print">
-          <pre className="min-h[350px] bg-white">
-            <output
-              className="block json-container whitespace-pre m-0 p-2 bg-white overflow-x-auto"
-              dangerouslySetInnerHTML={{ __html: output }}
-            />
-          </pre>
+        <div className="flex flex-col relative">
+          {output.length > 0 && (
+            <>
+              <CopyButton
+                className="self-end absolute top-4 right-4"
+                text="Copy JSON"
+                copy={rawOutput}
+                onCopiedText="Copied JSON"
+              />
+              <div className="border p-2 rounded-md" data-component="pretty-print">
+                <pre className="min-h[350px] bg-white">
+                  <output
+                    className="block json-container whitespace-pre m-0 p-2 bg-white overflow-x-auto"
+                    dangerouslySetInnerHTML={{ __html: output }}
+                    ref={ref}
+                  />
+                </pre>
+              </div>
+            </>
+          )}
+          {output.length < 1 && (
+            <NoticeEmptyStateDashedWithIcon
+              className="mt-6 text-sm font-medium text-gray-500"
+              icon={
+                <BracesIcon className="mx-auto h-12 w-12 text-gray-400" height={48} width={48} />
+              }
+            >
+              Please enter valid JSON.
+            </NoticeEmptyStateDashedWithIcon>
+          )}
         </div>
       )}
     </div>
