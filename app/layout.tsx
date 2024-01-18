@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AxiomWebVitals } from "next-axiom";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import BaseLayout from "@/components/base-layout";
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <BaseLayout>{children}</BaseLayout>
+        <AxiomWebVitals />
       </body>
     </html>
   );

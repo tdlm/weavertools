@@ -20,6 +20,7 @@
     "comment-json": "^4.2.3",
     "lucide-react": "^0.311.0",
     "next": "14.0.4",
+    "next-axiom": "^1.1.1",
     "nuqs": "^1.15.2",
     "pretty-print-json": "^2.1.1",
     "react": "^18",
