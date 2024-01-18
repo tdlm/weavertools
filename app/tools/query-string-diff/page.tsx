@@ -1,4 +1,4 @@
-import { useLogger } from "next-axiom";
+import { Logger } from "next-axiom";
 import { Metadata } from "next";
 import QueryStringDiffPage from "@/components/pages/query-string-diff";
 
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const Page = () => {
-  const log = useLogger();
+  const log = new Logger();
   log.debug("Rendering page", { test: "123" });
   return (
     <div className="w-full">
