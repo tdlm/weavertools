@@ -5,8 +5,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import CodeText from "@/components/code-text";
-import fetchJsonUrl from "@/actions/fetch-json-url";
 import TitleHeader from "@/components/title-header";
+import fetchJsonUrl from "@/lib/fetch-json-url";
 import isValidUrl from "@/lib/is-valid-url";
 
 import { Loader } from "lucide-react";
@@ -53,6 +53,11 @@ export default function JSONFormatterPage() {
             defaultValue={fetchUrl as string}
             disabled={isFetching}
             onChange={(e) => setFetchUrl(e.target.value)}
+            onKeyUp={(event) => {
+              if (event.key === "Enter") {
+                handleClickFetch();
+              }
+            }}
             placeholder="https://..."
             title="URL"
           />
