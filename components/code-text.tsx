@@ -96,7 +96,7 @@ export default function CodeText({
     >
       <Textarea
         className="break-words h-[200px] w-full"
-        defaultValue={input}
+        value={input}
         onChange={handleInputChange}
         placeholder={placeholder}
       />

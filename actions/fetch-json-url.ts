@@ -8,7 +8,7 @@ export default async function fetchJsonUrl(url: string) {
     const status = resp.status;
 
     if (status !== 200) {
-      throw new TypeError("Error getting data");
+      return { error: `HTTP ${status}: Error getting data` };
     }
 
     const text = await resp.json();
@@ -19,5 +19,6 @@ export default async function fetchJsonUrl(url: string) {
       return { error: err.message };
     }
     console.error(err?.message);
+    return { error: err?.message || "Failed to fetch JSON" };
   }
 }

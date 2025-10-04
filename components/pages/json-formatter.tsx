@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import CodeText from "@/components/code-text";
 import TitleHeader from "@/components/title-header";
-import fetchJsonUrl from "@/lib/fetch-json-url";
+import fetchJsonUrl from "@/actions/fetch-json-url";
 import isValidUrl from "@/lib/is-valid-url";
 
 import { Loader } from "lucide-react";
@@ -18,24 +18,33 @@ export default function JSONFormatterPage() {
   const [error, setError] = useState<string>("");
 
   const handleClickFetch = async () => {
+    console.log("handleClickFetch called with URL:", fetchUrl);
     if (!!fetchUrl && isValidUrl(fetchUrl)) {
+      console.log("URL is valid, starting fetch...");
       setError("");
       setIsFetching(true);
       try {
+        console.log("Calling fetchJsonUrl...");
         const data = await fetchJsonUrl(fetchUrl);
+        console.log("fetchJsonUrl returned:", data);
 
-        if (data.error) {
+        if (data && data.error) {
+          console.log("Error in response:", data.error);
           setError(data.error);
           setIsFetching(false);
           return;
         }
 
+        console.log("Setting JSON data:", data);
         setJSON(data);
         setIsFetching(false);
       } catch (err) {
-        console.error(err);
+        console.error("Caught error:", err);
+        setError("Failed to fetch JSON: " + (err as Error).message);
         setIsFetching(false);
       }
+    } else {
+      console.log("URL is invalid or empty:", fetchUrl);
     }
   };
 
@@ -50,7 +59,7 @@ export default function JSONFormatterPage() {
         <div className="flex flex-row">
           <Input
             className="rounded-tr-none rounded-br-none"
-            defaultValue={fetchUrl as string}
+            value={fetchUrl}
             disabled={isFetching}
             onChange={(e) => setFetchUrl(e.target.value)}
             onKeyUp={(event) => {
@@ -71,7 +80,7 @@ export default function JSONFormatterPage() {
           </Button>
         </div>
         <CodeText
-          initialValue={json && json.length > 0 ? JSON.stringify(json) : ""}
+          initialValue={json && typeof json === 'object' ? JSON.stringify(json, null, 2) : ""}
           externalError={error}
           onFormatSuccess={(json) => setJSON(json)}
           placeholder="Type or paste code here..."

@@ -15,13 +15,13 @@ const QueryStringDiffPage = () => {
   const fullURL = typeof window !== "undefined" ? window.location.href : "";
 
   const [url, setUrl] = useQueryState("url", {
-    parse: (value) => atob(decodeURIComponent(value)),
-    serialize: (value) => encodeURIComponent(btoa(value)),
+    parse: (value) => decodeURIComponent(value),
+    serialize: (value) => encodeURIComponent(value),
   });
 
   const [compareUrl, setCompareUrl] = useQueryState("compare-url", {
-    parse: (value) => atob(decodeURIComponent(value)),
-    serialize: (value) => encodeURIComponent(btoa(value)),
+    parse: (value) => decodeURIComponent(value),
+    serialize: (value) => encodeURIComponent(value),
   });
 
   const [queryParts, setQueryParts] = useState<DataItem[]>([]);

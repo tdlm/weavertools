@@ -35,9 +35,9 @@ export default function createDiffMap(array1: DataItem[], array2: DataItem[]) {
   });
 
   // Remaining items in array2Map are exclusive to the second array
-  exclusiveToSecond = Array.from(array2Map.values()).map((value) => ({
-    key: value?.toString() || "",
-    value: value?.toString() || "",
+  exclusiveToSecond = Array.from(array2Map.entries()).map(([key, value]) => ({
+    key: key,
+    value: value,
   }));
 
   return { commonDiff, exclusiveToFirst, exclusiveToSecond };
