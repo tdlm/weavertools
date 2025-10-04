@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   Braces as BracesIcon,
   Diff as DiffIcon,
+  Hash as HashIcon,
   Menu as MenuIcon,
   Unlink as UnlinkIcon,
   X as XIcon,
@@ -27,6 +28,12 @@ const navigation = [
     href: "/tools/query-string-split",
     icon: UnlinkIcon,
     current: true,
+  },
+  {
+    name: "Base64 Encoder/Decoder",
+    href: "/tools/base64-encoder",
+    icon: HashIcon,
+    current: false,
   },
 ];
 
