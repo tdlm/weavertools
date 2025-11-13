@@ -4,8 +4,5 @@ const nextConfig = {}
 
 module.exports = withAxiom({
   ...nextConfig,
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
-  },
 });
 
