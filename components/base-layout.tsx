@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   Braces as BracesIcon,
   Diff as DiffIcon,
+  FileText as FileTextIcon,
   Hash as HashIcon,
   Menu as MenuIcon,
   Unlink as UnlinkIcon,
@@ -33,6 +34,12 @@ const navigation = [
     name: "Base64 Encoder/Decoder",
     href: "/tools/base64-encoder",
     icon: HashIcon,
+    current: false,
+  },
+  {
+    name: "RichText to Markdown",
+    href: "/tools/richtext-to-markdown",
+    icon: FileTextIcon,
     current: false,
   },
 ];

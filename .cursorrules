@@ -72,6 +72,7 @@ Weaver Tools is a Next.js 14 application providing developer utility tools inclu
 - Follow existing patterns for new dependencies
 - Keep dependencies up to date
 - Document any new major dependencies
+- **Package Manager**: This project uses `pnpm` for package management. Always use `pnpm` commands (e.g., `pnpm install`, `pnpm add`) instead of npm or yarn
 
 ### Testing Considerations
 - Write testable code with pure functions where possible
