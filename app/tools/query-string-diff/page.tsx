@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import QueryStringDiffPage from "@/components/pages/query-string-diff";
 
 export const metadata: Metadata = {
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div className="w-full">
-      <QueryStringDiffPage />
+      <Suspense fallback={<div>Loading...</div>}>
+        <QueryStringDiffPage />
+      </Suspense>
     </div>
   );
 };

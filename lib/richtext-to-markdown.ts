@@ -48,7 +48,10 @@ export function convertHtmlToMarkdown(html: string): string {
 
   // Configure turndown to handle common HTML elements
   turndownService.addRule("strikethrough", {
-    filter: ["del", "s", "strike"],
+    filter: (node) => {
+      const tagName = (node as HTMLElement).tagName?.toLowerCase();
+      return tagName === "del" || tagName === "s" || tagName === "strike";
+    },
     replacement: (content) => `~~${content}~~`,
   });
 

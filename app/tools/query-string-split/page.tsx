@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import QueryStringSplitPage from "@/components/pages/query-string-split";
 
 export const metadata: Metadata = {
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div className="w-full">
-      <QueryStringSplitPage />
+      <Suspense fallback={<div>Loading...</div>}>
+        <QueryStringSplitPage />
+      </Suspense>
     </div>
   );
 };

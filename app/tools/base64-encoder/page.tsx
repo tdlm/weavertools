@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import Base64EncoderPage from "@/components/pages/base64-encoder";
 
 export const metadata: Metadata = {
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div className="w-full">
-      <Base64EncoderPage />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Base64EncoderPage />
+      </Suspense>
     </div>
   );
 };
