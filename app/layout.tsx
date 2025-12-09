@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AxiomWebVitals } from "next-axiom";
 import { Inter } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import BaseLayout from "@/components/base-layout";
 
@@ -33,7 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <BaseLayout>{children}</BaseLayout>
+        <NuqsAdapter>
+          <BaseLayout>{children}</BaseLayout>
+        </NuqsAdapter>
         <AxiomWebVitals />
       </body>
     </html>
